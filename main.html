@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Delights Bakery - Kelezatan Autentik Setiap Hari</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #8D5B4C;
+            --primary-hover: #734537;
+            --secondary: #E8A87C;
+            --accent: #D4A373;
+            --bg-cream: #FAFAFA;
+            --bg-warm: #FFF9F3;
+            --bg-card: #FFFFFF;
+            --text-main: #332723;
+            --text-muted: #70625D;
+            --border-color: #EFE6DD;
+            --success: #2E7D32;
+            --shadow-sm: 0 4px 6px -1px rgba(141, 91, 76, 0.05), 0 2px 4px -1px rgba(141, 91, 76, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(141, 91, 76, 0.08), 0 4px 6px -2px rgba(141, 91, 76, 0.04);
+            --shadow-lg: 0 20px 25px -5px rgba(141, 91, 76, 0.12), 0 10px 10px -5px rgba(141, 91, 76, 0.04);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-warm);
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: var(--bg-warm);
+            border: 1px solid var(--border-color);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .cart-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--primary);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            transition: var(--transition);
+        }
+
+        .cart-badge.bump {
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            50% { transform: scale(1.4); }
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, var(--bg-warm) 0%, #FFF3E9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(232, 168, 124, 0.15);
+            border-radius: 50%;
+            blur: 40px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            line-height: 1.15;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .hero-content p {
+            font-size: 17px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(141, 91, 76, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(141, 91, 76, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(141, 91, 76, 0.04);
+        }
+
+        .hero-img-container {
+            position: relative;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: 30px;
+            left: -20px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-badge .icon {
+            width: 40px;
+            height: 40px;
+            background: #FFF3E9;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 50px;
+        }
+
+        .section-subtitle {
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 38px;
+            color: var(--text-main);
+            margin-bottom: 16px;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 22px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(141, 91, 76, 0.2);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .cake-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cake-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(141, 91, 76, 0.2);
+        }
+
+        .cake-img-wrapper {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .cake-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .cake-card:hover .cake-img {
+            transform: scale(1.06);
+        }
+
+        .tag-category {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .cake-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .cake-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .cake-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: #F59E0B;
+            font-weight: 600;
+        }
+
+        .cake-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .cake-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .add-cart-btn {
+            background: var(--bg-warm);
+            color: var(--primary);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .add-cart-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .features-bg {
+            background: var(--bg-warm);
+            border-y: 1px solid var(--border-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 32px 24px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #FFF3E9;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* How to order */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            position: relative;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-num {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 auto 16px;
+            box-shadow: 0 4px 10px rgba(141, 91, 76, 0.3);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 28px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 18px 24px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-answer {
+            padding: 0 24px 18px;
+            font-size: 14.5px;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        footer {
+            background: #271E1B;
+            color: #E2D9D5;
+            padding: 70px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand h2 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: #A3958F;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #A3958F;
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 13px;
+            color: #857670;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            background: white;
+            z-index: 1100;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cart-drawer.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-header h3 {
+            font-size: 20px;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .cart-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+        }
+
+        .cart-empty i {
+            font-size: 48px;
+            color: var(--border-color);
+            margin-bottom: 12px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            font-size: 13.5px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .delete-item {
+            color: #DC2626;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 8px;
+        }
+
+        .cart-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-warm);
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        /* Modal Checkout */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13.5px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(141, 91, 76, 0.1);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .payment-option {
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-option input {
+            accent-color: var(--primary);
+        }
+
+        .payment-option:hover, .payment-option.selected {
+            border-color: var(--primary);
+            background: var(--bg-warm);
+        }
+
+        .qris-box {
+            text-align: center;
+            padding: 16px;
+            background: var(--bg-warm);
+            border-radius: var(--radius-sm);
+            margin-top: 14px;
+            display: none;
+        }
+
+        .qris-box img {
+            width: 160px;
+            height: 160px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        /* Success Invoice Modal */
+        .invoice-card {
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            background: #E8F5E9;
+            color: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 16px;
+        }
+
+        .invoice-details {
+            background: var(--bg-warm);
+            border-radius: var(--radius-sm);
+            padding: 18px;
+            margin: 20px 0;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .invoice-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin: 0 auto 32px;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .floating-badge {
+                left: 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-cake-candles"></i></div>
+                <div class="logo-text">Sweet Delights</div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#menu">Menu Kue</a></li>
+                <li><a href="#keunggulan">Keunggulan</a></li>
+                <li><a href="#cara-pesan">Cara Pesan</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="cart-btn" id="openCartBtn" aria-label="Buka Keranjang">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <button class="hamburger" id="hamburgerBtn"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="beranda">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Sajikan Kelezatan <span>Kue Autentik</span> di Setiap Momen</h1>
+                    <p>Dibuat segar setiap hari menggunakan premium butter, cokelat impor berkualitas, serta bebas bahan pengawet. Rayakan momen spesialmu dengan rasa terbaik.</p>
+                    <div class="hero-cta">
+                        <a href="#menu" class="btn btn-primary"><i class="fa-solid fa-utensils"></i> Lihat Menu</a>
+                        <a href="#cara-pesan" class="btn btn-secondary">Cara Pesan</a>
+                    </div>
+                </div>
+                <div class="hero-img-container">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" alt="Cake Spesial Sweet Delights" class="hero-img">
+                    <div class="floating-badge">
+                        <div class="icon"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 15px;">4.9 / 5.0 Rating</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">Dari 2,500+ Pelanggan Puas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Katalog Pilihan</span>
+                <h2 class="section-title">Menu Kue Terfavorit</h2>
+                <p style="color: var(--text-muted);">Pilih dari aneka hidangan penutup dan cake lezat buatan para pastry chef profesional kami.</p>
+            </div>
+
+            <div class="filter-container">
+                <button class="filter-btn active" data-category="all">Semua Menu</button>
+                <button class="filter-btn" data-category="cake">Cake & Birthday</button>
+                <button class="filter-btn" data-category="pastry">Pastry & Croissant</button>
+                <button class="filter-btn" data-category="dessert">Dessert Box</button>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+                <!-- Dynamically generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <section class="section features-bg" id="keunggulan">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Kualitas Utama</span>
+                <h2 class="section-title">Mengapa Memilih Sweet Delights?</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-wheat-awn"></i></div>
+                    <h3>Bahan Premium & Halal</h3>
+                    <p>Menggunakan bahan baku kualitas impor terbaik, 100% Halal tanpa bahan kimia berbahaya.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-fire-burner"></i></div>
+                    <h3>Freshly Baked Every Day</h3>
+                    <p>Kue dipanggang langsung di hari pengiriman untuk menjamin kesegaran dan kelembutan rasa.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3>Pengiriman Aman</h3>
+                    <p>Dikemas khusus dengan cooler box / packaging tebal agar bentuk kue tetap sempurna sampai di tujuan.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-heart"></i></div>
+                    <h3>Custom Ucapan & Desain</h3>
+                    <p>Bisa tambahkan kartu ucapan & tulisan nama kustom untuk hadiah ulang tahun atau perayaan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="cara-pesan">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Mudah & Cepat</span>
+                <h2 class="section-title">4 Langkah Mudah Pemesanan</h2>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h4>Pilih Kue</h4>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-top: 8px;">Pilih kue favoritmu dari katalog dan tambahkan ke keranjang.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h4>Isi Form Pesanan</h4>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-top: 8px;">Lengkapi alamat pengiriman dan catatan ucapan spesial.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h4>Pilih Pembayaran</h4>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-top: 8px;">Bayar mudah via Bank Transfer, QRIS, E-Wallet, atau COD.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h4>Nikmati Kue</h4>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-top: 8px;">Kue fresh dikirimkan tepat waktu siap dinikmati bersama!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section features-bg">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Kata Mereka</span>
+                <h2 class="section-title">Testimoni Pelanggan</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="margin-top: 12px; font-size: 14.5px;">"Red Velvet Cakenya bener-bener lembut & cream cheesenya pas banget gak bikin enek. Anak saya suka banget buat pesta ulang tahun kemarin!"</p>
+                    <div class="user-info">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Siska Utami" class="user-avatar">
+                        <div>
+                            <div style="font-weight: 700; font-size: 14px;">Siska Utami</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">Jakarta Selatan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="margin-top: 12px; font-size: 14.5px;">"Butter Croissant terbaik di kota! Reutrenya wangi banget dan flaky di luar tapi lembut di dalam. Pengiriman juga tergolong cepat."</p>
+                    <div class="user-info">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Budi Prasetyo" class="user-avatar">
+                        <div>
+                            <div style="font-weight: 700; font-size: 14px;">Budi Prasetyo</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">Tangerang</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="margin-top: 12px; font-size: 14.5px;">"Pesan Dessert Box buat hadiah wisuda sahabat. Packingnya sangat aman dan rapi, dapet kartu ucapan cantik juga. Recommended!"</p>
+                    <div class="user-info">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Nadia Rahma" class="user-avatar">
+                        <div>
+                            <div style="font-weight: 700; font-size: 14px;">Nadia Rahma</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">Bandung</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Pertanyaan Umum</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Berapa lama waktu pemesanan kue (H-Berapa)? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Untuk menu regular (Pastry, Dessert Box) bisa dipesan Sameday (H-0). Untuk Custom Birthday Cake disarankan memesan minimal H-2 sebelum hari pengiriman.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Apakah kue Sweet Delights menggunakan pengawet? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Sama sekali tidak! Semua produk kami dibuat secara alami tanpa pengawet sintesis. Tahan 2-3 hari di suhu ruangan dan 5-7 hari di kulkas.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Apakah bisa minta tulisan ucapan pada cake? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Bisa sekali! Anda dapat mengisikan pesan tulisan ucapan pada kolom Catatan Khusus saat melakukan Checkout.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>Sweet Delights Bakery</h2>
+                    <p>Menghadirkan senyuman lewat kelezatan kue berkualitas tinggi buatan penuh cinta sejak 2018.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Navigasi</h4>
+                    <ul class="footer-links">
+                        <li><a href="#beranda">Beranda</a></li>
+                        <li><a href="#menu">Katalog Menu</a></li>
+                        <li><a href="#keunggulan">Keunggulan Kami</a></li>
+                        <li><a href="#cara-pesan">Cara Pemesanan</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Kategori</h4>
+                    <ul class="footer-links">
+                        <li><a href="#menu">Birthday Cake</a></li>
+                        <li><a href="#menu">French Pastry</a></li>
+                        <li><a href="#menu">Dessert Box</a></li>
+                        <li><a href="#menu">Cheesecake</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Kontak Kami</h4>
+                    <ul class="footer-links">
+                        <li><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Jl. Kuliner Indah No. 88, Jakarta</li>
+                        <li><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> +62 812-3456-7890</li>
+                        <li><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> hello@sweetdelights.id</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 Sweet Delights Bakery. All Rights Reserved. Crafted with <i class="fa-solid fa-heart" style="color: #E8A87C;"></i> for Cake Lovers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Overlay & Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-bag-shopping" style="color: var(--primary);"></i> Keranjang Belanja</h3>
+            <button class="close-cart" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-body" id="cartItemsContainer">
+            <!-- Dynamic Cart Items -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Total Biaya:</span>
+                <span id="cartTotalPrice" style="color: var(--primary);">Rp 0</span>
+            </div>
+            <button class="btn btn-primary" id="checkoutBtn" style="width: 100%;" disabled>Lanjut Ke Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeCheckoutBtn"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-size: 24px; margin-bottom: 20px;">Formulir Pemesanan</h3>
+
+            <form id="checkoutForm">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Nama Pemesan *</label>
+                        <input type="text" class="form-control" id="custName" placeholder="Contoh: Farel Salman" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nomor WhatsApp *</label>
+                        <input type="tel" class="form-control" id="custPhone" placeholder="08123456789" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Alamat Lengkap Pengiriman *</label>
+                    <textarea class="form-control" id="custAddress" rows="2" placeholder="Nama Jalan, No. Rumah, Kecamatan, Kota" required></textarea>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Tanggal Pengiriman *</label>
+                        <input type="date" class="form-control" id="deliveryDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Jam Pengiriman *</label>
+                        <select class="form-control" id="deliveryTime" required>
+                            <option value="10:00 - 12:00">10:00 - 12:00 WIB</option>
+                            <option value="13:00 - 15:00">13:00 - 15:00 WIB</option>
+                            <option value="16:00 - 18:00">16:00 - 18:00 WIB</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Catatan Khusus (Tulisan di Kue / Pesan Ucapan)</label>
+                    <input type="text" class="form-control" id="custNote" placeholder="Contoh: Selamat Ulang Tahun ke-20 Farel!">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Pilih Metode Pembayaran *</label>
+                    <div class="payment-options">
+                        <label class="payment-option selected">
+                            <input type="radio" name="payment" value="BCA" checked>
+                            <span>Transfer Bank (BCA)</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="QRIS">
+                            <span>QRIS (Scan All E-Wallet)</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="GoPay/OVO">
+                            <span>E-Wallet (GoPay/OVO)</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="COD">
+                            <span>Cash on Delivery (COD)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- QRIS Dynamic Display -->
+                <div class="qris-box" id="qrisBox">
+                    <p style="font-size: 13px; font-weight: 600;">Scan QRIS di bawah ini untuk membayar:</p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=SweetDelightsBakeryPayment" alt="QRIS Code">
+                    <p style="font-size: 12px; color: var(--text-muted);">Mendukung GoPay, OVO, Dana, ShopeePay & BCA Mobile</p>
+                </div>
+
+                <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="font-size: 12px; color: var(--text-muted); display: block;">Total Pembayaran:</span>
+                        <span id="modalTotal" style="font-size: 20px; font-weight: 700; color: var(--primary);">Rp 0</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-lock"></i> Konfirmasi & Bayar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Invoice Success Modal -->
+    <div class="modal-overlay" id="invoiceModal">
+        <div class="modal-card invoice-card">
+            <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+            <h3 style="font-size: 24px; color: var(--text-main);">Pesanan Berhasil Dibuat!</h3>
+            <p style="font-size: 14px; color: var(--text-muted); margin-top: 6px;">Terima kasih telah memesan di Sweet Delights Bakery.</p>
+
+            <div class="invoice-details" id="invoiceDetails">
+                <!-- Dynamically filled by JS -->
+            </div>
+
+            <div style="display: flex; gap: 12px; justify-content: center;">
+                <button class="btn btn-primary" id="sendWaBtn" style="background: #25D366; border: none;">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> Kirim Detail ke WhatsApp Toko
+                </button>
+                <button class="btn btn-secondary" id="closeInvoiceBtn">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Katalog Kue
+        const cakeProducts = [
+            {
+                id: 1,
+                name: "Signature Red Velvet",
+                category: "cake",
+                rating: 4.9,
+                price: 280000,
+                desc: "Cake klasik berwarna merah lembut dengan lapisan cream cheese premium & taburan remahan gurih.",
+                image: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "Belgian Chocolate Fudge",
+                category: "cake",
+                rating: 5.0,
+                price: 310000,
+                desc: "Sajian manis cokelat Belgia murni 70% dark chocolate yang melimpah dan lumer di mulut.",
+                image: "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "French Butter Croissant",
+                category: "pastry",
+                rating: 4.8,
+                price: 28000,
+                desc: "Croissant ala Prancis renyah berlayer dipanggang menggunakan Elle & Vire Premium Butter.",
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "New York Strawberry Cheesecake",
+                category: "cake",
+                rating: 4.9,
+                price: 295000,
+                desc: "Cheesecake tebal bergaya NY disajikan dengan topping saus stroberi buatan sendiri.",
+                image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "Tiramisu Dessert Box",
+                category: "dessert",
+                rating: 4.8,
+                price: 65000,
+                desc: "Perpaduan biskuit ladyfinger beraroma espresso espresso berkualitas dan mascarpone krimi.",
+                image: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 6,
+                name: "Almond Pain Au Chocolat",
+                category: "pastry",
+                rating: 4.7,
+                price: 34000,
+                desc: "Pastry renyah berisian batang cokelat lezat ditaburi irisan kacang almond gurih.",
+                image: "https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 7,
+                name: "Mango Lotus Biscoff Box",
+                category: "dessert",
+                rating: 4.9,
+                price: 70000,
+                desc: "Lapisan biskuit Biscoff renyah dipadu dengan krim manis dan potongan mangga harum segar.",
+                image: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 8,
+                name: "Matcha Green Tea Cupcake",
+                category: "cake",
+                rating: 4.8,
+                price: 32000,
+                desc: "Cupcake lembut rasa matcha murni Kyoto Jepang dengan frosting buttercream nikmat.",
+                image: "https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // State Aplikasi
+        let cart = [];
+
+        // Formatting Rupiah
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(amount);
+        }
+
+        // Render Menu Items
+        function renderMenu(category = 'all') {
+            const menuGrid = document.getElementById('menuGrid');
+            menuGrid.innerHTML = '';
+
+            const filteredProducts = category === 'all' 
+                ? cakeProducts 
+                : cakeProducts.filter(p => p.category === category);
+
+            filteredProducts.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'cake-card';
+                card.innerHTML = `
+                    <div class="cake-img-wrapper">
+                        <span class="tag-category">${item.category.toUpperCase()}</span>
+                        <img src="${item.image}" alt="${item.name}" class="cake-img" loading="lazy">
+                    </div>
+                    <div class="cake-info">
+                        <div class="cake-header">
+                            <h3 class="cake-title">${item.name}</h3>
+                            <div class="rating"><i class="fa-solid fa-star"></i> ${item.rating}</div>
+                        </div>
+                        <p class="cake-desc">${item.desc}</p>
+                        <div class="cake-footer">
+                            <div class="price">${formatRupiah(item.price)}</div>
+                            <button class="add-cart-btn" onclick="addToCart(${item.id})">
+                                <i class="fa-solid fa-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                `;
+                menuGrid.appendChild(card);
+            });
+        }
+
+        // Tambah Ke Keranjang Belanja
+        function addToCart(productId) {
+            const product = cakeProducts.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI();
+            
+            // Effect badge bump
+            const badge = document.getElementById('cartBadge');
+            badge.classList.add('bump');
+            setTimeout(() => badge.classList.remove('bump'), 300);
+        }
+
+        // Update UI Keranjang Belanja
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartBadge = document.getElementById('cartBadge');
+            const cartTotalPrice = document.getElementById('cartTotalPrice');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            // Total Quantity & Total Price
+            const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+            cartBadge.textContent = totalQty;
+            cartTotalPrice.textContent = formatRupiah(totalPrice);
+            document.getElementById('modalTotal').textContent = formatRupiah(totalPrice);
+
+            checkoutBtn.disabled = cart.length === 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        <p>Keranjang belanjaanmu masih kosong.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cartItemsContainer.innerHTML = '';
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${formatRupiah(item.price)}</div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                            <span style="font-size: 14px; font-weight: 600;">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                            <button class="delete-item" onclick="removeFromCart(${item.id})"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+        }
+
+        // Change Quantity
+        function changeQty(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartUI();
+                }
+            }
+        }
+
+        // Remove from Cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenu();
+
+            // Filter Buttons Event Listener
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderMenu(btn.dataset.category);
+                });
+            });
+
+            // Cart Drawer Open/Close
+            const openCartBtn = document.getElementById('openCartBtn');
+            const closeCartBtn = document.getElementById('closeCartBtn');
+            const cartDrawer = document.getElementById('cartDrawer');
+            const cartOverlay = document.getElementById('cartOverlay');
+
+            function toggleCart() {
+                cartDrawer.classList.toggle('active');
+                cartOverlay.classList.toggle('active');
+            }
+
+            openCartBtn.addEventListener('click', toggleCart);
+            closeCartBtn.addEventListener('click', toggleCart);
+            cartOverlay.addEventListener('click', toggleCart);
+
+            // Checkout Modal Open/Close
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const checkoutModal = document.getElementById('checkoutModal');
+            const closeCheckoutBtn = document.getElementById('closeCheckoutBtn');
+
+            checkoutBtn.addEventListener('click', () => {
+                toggleCart();
+                checkoutModal.classList.add('active');
+                // Set min delivery date as today
+                const dateInput = document.getElementById('deliveryDate');
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+                dateInput.value = today;
+            });
+
+            closeCheckoutBtn.addEventListener('click', () => {
+                checkoutModal.classList.remove('active');
+            });
+
+            // Payment Option Toggle (Show QRIS)
+            const paymentRadios = document.querySelectorAll('input[name="payment"]');
+            const qrisBox = document.getElementById('qrisBox');
+
+            paymentRadios.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+                    e.target.closest('.payment-option').classList.add('selected');
+
+                    if (e.target.value === 'QRIS') {
+                        qrisBox.style.display = 'block';
+                    } else {
+                        qrisBox.style.display = 'none';
+                    }
+                });
+            });
+
+            // Form Submit & Process Order
+            const checkoutForm = document.getElementById('checkoutForm');
+            const invoiceModal = document.getElementById('invoiceModal');
+
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const name = document.getElementById('custName').value;
+                const phone = document.getElementById('custPhone').value;
+                const address = document.getElementById('custAddress').value;
+                const date = document.getElementById('deliveryDate').value;
+                const time = document.getElementById('deliveryTime').value;
+                const note = document.getElementById('custNote').value || '-';
+                const payment = document.querySelector('input[name="payment"]:checked').value;
+
+                const orderNum = 'SWD-' + Math.floor(100000 + Math.random() * 900000);
+                const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+                // Build Summary HTML
+                const itemsSummary = cart.map(i => `${i.name} (${i.qty}x)`).join(', ');
+                
+                document.getElementById('invoiceDetails').innerHTML = `
+                    <div class="invoice-row"><span>No. Pesanan:</span> <strong>${orderNum}</strong></div>
+                    <div class="invoice-row"><span>Nama Pemesan:</span> <strong>${name}</strong></div>
+                    <div class="invoice-row"><span>Tanggal & Jam:</span> <strong>${date} (${time})</strong></div>
+                    <div class="invoice-row"><span>Metode Bayar:</span> <strong>${payment}</strong></div>
+                    <div class="invoice-row"><span>Pesanan:</span> <strong>${itemsSummary}</strong></div>
+                    <div class="invoice-row"><span>Catatan:</span> <i>${note}</i></div>
+                    <hr style="margin: 10px 0; border: none; border-top: 1px dashed var(--border-color);">
+                    <div class="invoice-row" style="font-size: 16px;"><span>Total Bayar:</span> <strong style="color: var(--primary);">${formatRupiah(totalPrice)}</strong></div>
+                `;
+
+                // Set WA Direct Button
+                const sendWaBtn = document.getElementById('sendWaBtn');
+                sendWaBtn.onclick = () => {
+                    let waText = `*PESANAN BARU - SWEET DELIGHTS BAKERY*\n`;
+                    waText += `No. Order: ${orderNum}\n`;
+                    waText += `Nama: ${name}\n`;
+                    waText += `No. HP: ${phone}\n`;
+                    waText += `Alamat: ${address}\n`;
+                    waText += `Tgl Pengiriman: ${date} (${time})\n`;
+                    waText += `Metode Pembayaran: ${payment}\n\n`;
+                    waText += `*Detail Pesanan:*\n`;
+                    cart.forEach(i => {
+                        waText += `- ${i.name} x${i.qty} = ${formatRupiah(i.price * i.qty)}\n`;
+                    });
+                    waText += `\n*Total Pembayaran: ${formatRupiah(totalPrice)}*\n`;
+                    waText += `Catatan: ${note}\n\n`;
+                    waText += `Mohon segera diproses ya Kak, terima kasih!`;
+
+                    const encodedText = encodeURIComponent(waText);
+                    window.open(`https://wa.me/6281234567890?text=${encodedText}`, '_blank');
+                };
+
+                // Close Checkout & Show Invoice
+                checkoutModal.classList.remove('active');
+                invoiceModal.classList.add('active');
+
+                // Clear Cart
+                cart = [];
+                updateCartUI();
+                checkoutForm.reset();
+            });
+
+            document.getElementById('closeInvoiceBtn').addEventListener('click', () => {
+                invoiceModal.classList.remove('active');
+            });
+
+            // Accordion FAQ
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                item.querySelector('.faq-question').addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
